@@ -2,7 +2,7 @@ import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native'
 import React from 'react'
 import { COLORS, SIZES } from '../theme/theme'
 
-const OnboardingThreeScreen = () => {
+const OnboardingThreeScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Image source={require('../assets/images/read.png')} style={styles.image} />
@@ -16,7 +16,7 @@ const OnboardingThreeScreen = () => {
         <View style={styles.dot}></View>
         <View style={[styles.dot, { backgroundColor: COLORS.primary }]}></View>
       </View>
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity style={styles.button} onPress={()=> navigation.navigate('LoginScreen')}>
         <Text style={styles.buttonText}>SIGN UP</Text>
       </TouchableOpacity>
     </View>
@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.background
   },
   image: {
-    width: SIZES.width * 0.80,
+    width: SIZES.width * 0.90,
     height: SIZES.height * 0.35,
     resizeMode: 'contain',
     marginTop: SIZES.height * 0.15,

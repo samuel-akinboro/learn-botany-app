@@ -2,7 +2,7 @@ import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native'
 import React from 'react'
 import { COLORS, SIZES } from '../theme/theme'
 
-const OnboardingTwoScreen = () => {
+const OnboardingTwoScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Image source={require('../assets/images/learn.png')} style={styles.image} />
@@ -16,7 +16,7 @@ const OnboardingTwoScreen = () => {
         <View style={[styles.dot, { backgroundColor: COLORS.primary }]}></View>
         <View style={styles.dot}></View>
       </View>
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity style={styles.button} onPress={()=> navigation.navigate('OnboardingThreeScreen')}>
         <Text style={styles.buttonText}>NEXT</Text>
       </TouchableOpacity>
     </View>
