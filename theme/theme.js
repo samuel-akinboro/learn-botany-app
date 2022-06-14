@@ -8,7 +8,9 @@ const SIZES = {
   h2: 27,
   h3: 20,
   h4: 19,
-  p: 13
+  p: 13,
+  sm: 12,
+  base: 16
 }
 
 const COLORS = {
