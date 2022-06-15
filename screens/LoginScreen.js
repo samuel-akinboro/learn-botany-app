@@ -55,7 +55,7 @@ const LoginScreen = ({ navigation }) => {
               />
               <Text style={styles.rememberText}>Remember me</Text>
             </View>
-            <Text>Forgot Password?</Text>
+            <Text style={{fontSize: SIZES.sm, color: COLORS.greyText}}>Forgot Password?</Text>
           </View>
         </Form>
         <View style={{flexDirection: 'row', justifyContent: 'center'}}>
