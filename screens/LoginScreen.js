@@ -4,12 +4,12 @@ import { Ionicons } from '@expo/vector-icons'
 import { COLORS, SIZES } from '../theme/theme'
 import { Form, FormItem } from 'react-native-form-component'
 import { FontAwesome } from '@expo/vector-icons'; 
-// import CheckBox from '@react-native-community/checkbox';
+import Checkbox from 'expo-checkbox';
 
 const LoginScreen = ({ navigation }) => {
   const [usernameInput, setUsernameInput] = React.useState('');
   const [passwordInput, setPasswordInput] = React.useState('');
-  const [toggleCheckBox, setToggleCheckBox] = React.useState(false)
+  const [isChecked, setIsChecked] = React.useState(false)
 
   return (
     <View style={styles.container}>
@@ -18,8 +18,8 @@ const LoginScreen = ({ navigation }) => {
         <Text style={styles.welcomeText}>Let’s Learn More About Plants</Text>
         <Form 
           onButtonPress={() => console.warn('do something')}
-          style={{width: '100%'}}
-          buttonStyle={{backgroundColor: COLORS.primary, borderRadius: 3}}
+          style={styles.form}
+          buttonStyle={{backgroundColor: COLORS.primary, borderRadius: 3, marginBottom: 20}}
         >
           <FormItem 
             label="Username"
@@ -36,7 +36,7 @@ const LoginScreen = ({ navigation }) => {
             isRequired
             value={passwordInput}
             onChangeText={(text) => setPasswordInput(text)}
-            underneathText="username"
+            underneathText="Enter password"
             textInputStyle={{borderBottomWidth: 1, borderColor: passwordInput ? COLORS.primary : '#6A6F7D', borderRadius: 0}}
             labelStyle={{color: '#6A6F7D', fontSize: SIZES.p, marginLeft: 0, fontWeight: '400'}}
             floatingLabel={true}
@@ -44,18 +44,26 @@ const LoginScreen = ({ navigation }) => {
             showIcon={<FontAwesome name="eye" size={20} color={COLORS.greyText} style={{right: 0, position: 'absolute', bottom: -15}} />}
             hideIcon={<FontAwesome name="eye-slash" size={20} color={COLORS.greyText} style={{right: 0, position: 'absolute', bottom: -15}} />}
           />
-          <View>
-            <View>
-              {/* <CheckBox
-                disabled={false}
-                value={toggleCheckBox}
-                onValueChange={(newValue) => setToggleCheckBox(newValue)}
-              /> */}
-              <Text>Remember me</Text>
+          <View style={styles.rememberContainer}>
+            <View style={styles.remember}>
+              <Checkbox
+                disabled={(!usernameInput && !passwordInput) && true}
+                value={isChecked}
+                onValueChange={(newValue) => setIsChecked(newValue)}
+                color={isChecked ? COLORS.primary : undefined}
+                style={styles.checkbox}
+              />
+              <Text style={styles.rememberText}>Remember me</Text>
             </View>
             <Text>Forgot Password?</Text>
           </View>
         </Form>
+        <View style={{flexDirection: 'row', justifyContent: 'center'}}>
+          <Text style={styles.createAccount}>Don’t Have Account?</Text>
+          <TouchableOpacity>
+            <Text style={styles.createAccountLink}>Sign Up</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   )
@@ -101,6 +109,41 @@ const styles = StyleSheet.create({
     marginLeft: 5,
     color: '#495566',
     marginTop: 10,
-    marginBottom: 20
+    marginBottom: 30
+  },
+  form: {
+    width: '100%',
+    marginBottom: 0,
+    paddingBottom: 0
+  },
+  rememberContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingHorizontal: 9,
+    marginBottom: 30
+  },
+  remember: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  checkbox: {
+    width: 16,
+    height: 16,
+    marginRight: 5
+  },
+  rememberText: {
+    color: '#6A6F7D',
+    fontSize: 11
+  }, 
+  createAccount: {
+    textAlign: 'center',
+    fontSize: SIZES.p,
+    color: COLORS.greyText
+  },
+  createAccountLink: {
+    color: COLORS.primary,
+    marginLeft: 5,
+    fontSize: SIZES.p
   }
 })
